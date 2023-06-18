@@ -1,3 +1,4 @@
+import sys
 import os
 import tarfile
 import gzip
@@ -6,8 +7,7 @@ from pathlib import Path
 
 
 
-def sorting_main_func():
-    main_path = Path().resolve()
+def sorting_main_func(main_path):
 
     CYRILLIC_SYMBOLS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяєіїґ "
     TRANSLATION = ("a", "b", "v", "g", "d", "e", "e", "j", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
@@ -183,3 +183,9 @@ def sorting_main_func():
         print(f'Скрипту були відомі файли з такими розширеннями:\n{known_file_types_list}\n')
     if unknown_file_types_list:
         print(f'Скрипту не були відомі файли з такими розширеннями:\n{unknown_file_types_list}')
+
+def args_check_func():        
+    try:
+        sorting_main_func(Path(sys.argv[1]))
+    except IndexError:
+        print('Помилка! Ви не надали шлях!')
